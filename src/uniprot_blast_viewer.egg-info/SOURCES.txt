@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/uniprot_blast_viewer/__init__.py
+src/uniprot_blast_viewer/general_utils.py
+src/uniprot_blast_viewer/globals.py
+src/uniprot_blast_viewer/uniprot_querry.py
+src/uniprot_blast_viewer/view_blast_jason_web.py
+src/uniprot_blast_viewer.egg-info/PKG-INFO
+src/uniprot_blast_viewer.egg-info/SOURCES.txt
+src/uniprot_blast_viewer.egg-info/dependency_links.txt
+src/uniprot_blast_viewer.egg-info/entry_points.txt
+src/uniprot_blast_viewer.egg-info/requires.txt
+src/uniprot_blast_viewer.egg-info/top_level.txt
+src/uniprot_blast_viewer/data/ncbiblast-R20251121-121303-0264-85327113-p2m.out.json

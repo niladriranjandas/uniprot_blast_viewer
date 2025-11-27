@@ -1,0 +1,71 @@
+{
+    "program": "blastp",
+    "version": "BLASTP 2.16.0+",
+    "command": "singularity exec $APPBIN/singularity/ncbiblast:2.16.0 /ncbiblast/bin/blastp -db &quot;uniprotkb_refprotswissprot&quot; -query ncbiblast-R20251121-121303-0264-85327113-p2m.sequence  -num_threads 32 -outfmt 11 -out ncbiblast-R20251121-121303-0264-85327113-p2m.archive -matrix BLOSUM62 -max_target_seqs 250 -evalue 10 -seg no -comp_based_stats F",
+    "query_def": "query_protein",
+    "query_stype": "protein",
+    "query_len": 389,
+    "db_count": 1,
+    "db_num": 140124025,
+    "db_len": 54616654136,
+    "dbs": [
+        {
+            "name": "uniprotkb_refprotswissprot",
+            "stype": "protein",
+            "created": "2025-09-29T02:09:00+01:00"
+        }
+    ],
+    "alignments": 250,
+    "scores": 250,
+    "expect_upper": 10.0,
+    "filter": "F",
+    "gap_extend": 1.0,
+    "gap_open": 11.0,
+    "matrix": "BLOSUM62",
+    "start": "2025-11-21T12:13:03+00:00",
+    "end": "2025-11-21T12:18:21+00:00",
+    "search": "P0Y0M0DT0H0M318.000S",
+    "hits": [
+        {
+            "hit_num": 1,
+            "hit_def": "SP:Q8VDQ8 SIR2_MOUSE NAD-dependent protein deacetylase sirtuin-2 OS=Mus musculus OX=10090 GN=Sirt2 PE=1 SV=2",
+            "hit_db": "SP",
+            "hit_id": "SIR2_MOUSE",
+            "hit_acc": "Q8VDQ8",
+            "hit_desc": "NAD-dependent protein deacetylase sirtuin-2 OS=Mus musculus OX=10090 GN=Sirt2 PE=1 SV=2",
+            "hit_url": "https://www.uniprot.org/uniprot/Q8VDQ8",
+            "hit_xref_url": "https://www.ebi.ac.uk/ebisearch/search.ebi?db=uniprot&query=Q8VDQ8",
+            "hit_dbfetch_url": "https://www.ebi.ac.uk/Tools/dbfetch/dbfetch?style=raw;db=uniprot;id=Q8VDQ8",
+            "hit_os": "Mus musculus",
+            "hit_uni_de": "NAD-dependent protein deacetylase sirtuin-2",
+            "hit_uni_os": "Mus musculus",
+            "hit_uni_ox": "10090",
+            "hit_uni_gn": "Sirt2",
+            "hit_uni_pe": "1",
+            "hit_uni_sv": "2",
+            "hit_len": 389,
+            "hit_hsps": [
+                {
+                    "hsp_num": 1,
+                    "hsp_score": 2052,
+                    "hsp_bit_score": 795.0,
+                    "hsp_expect": 0.0,
+                    "hsp_align_len": 389,
+                    "hsp_identity": 100.0,
+                    "hsp_positive": 100.0,
+                    "hsp_gaps": 0,
+                    "hsp_query_frame": "0",
+                    "hsp_hit_frame": "0",
+                    "hsp_strand": "none/none",
+                    "hsp_query_from": 1,
+                    "hsp_query_to": 389,
+                    "hsp_hit_from": 1,
+                    "hsp_hit_to": 389,
+                    "hsp_qseq": "MAEPDPSDPLETQAGKVQEAQDSDSDTEGGATGGEAEMDFLRNLFTQTLGLGSQKERLLDELTLEGVTRYMQSERCRKVICLVGAGISTSAGIPDFRSPSTGLYANLEKYHLPYPEAIFEISYFKKHPEPFFALAKELYPGQFKPTICHYFIRLLKEKGLLLRCYTQNIDTLERVAGLEPQDLVEAHGTFYTSHCVNTSCRKEYTMGWMKEKIFSEATPRCEQCQSVVKPDIVFFGENLPSRFFSCMQSDFSKVDLLIIMGTSLQVQPFASLISKAPLATPRLLINKEKTGQTDPFLGMMMGLGGGMDFDSKKAYRDVAWLGDCDQGCLALADLLGWKKELEDLVRREHANIDAQSGSQAPNPSTTISPGKSPPPAKEAARTKEKEEQQ",
+                    "hsp_mseq": "MAEPDPSDPLETQAGKVQEAQDSDSDTEGGATGGEAEMDFLRNLFTQTLGLGSQKERLLDELTLEGVTRYMQSERCRKVICLVGAGISTSAGIPDFRSPSTGLYANLEKYHLPYPEAIFEISYFKKHPEPFFALAKELYPGQFKPTICHYFIRLLKEKGLLLRCYTQNIDTLERVAGLEPQDLVEAHGTFYTSHCVNTSCRKEYTMGWMKEKIFSEATPRCEQCQSVVKPDIVFFGENLPSRFFSCMQSDFSKVDLLIIMGTSLQVQPFASLISKAPLATPRLLINKEKTGQTDPFLGMMMGLGGGMDFDSKKAYRDVAWLGDCDQGCLALADLLGWKKELEDLVRREHANIDAQSGSQAPNPSTTISPGKSPPPAKEAARTKEKEEQQ",
+                    "hsp_hseq": "MAEPDPSDPLETQAGKVQEAQDSDSDTEGGATGGEAEMDFLRNLFTQTLGLGSQKERLLDELTLEGVTRYMQSERCRKVICLVGAGISTSAGIPDFRSPSTGLYANLEKYHLPYPEAIFEISYFKKHPEPFFALAKELYPGQFKPTICHYFIRLLKEKGLLLRCYTQNIDTLERVAGLEPQDLVEAHGTFYTSHCVNTSCRKEYTMGWMKEKIFSEATPRCEQCQSVVKPDIVFFGENLPSRFFSCMQSDFSKVDLLIIMGTSLQVQPFASLISKAPLATPRLLINKEKTGQTDPFLGMMMGLGGGMDFDSKKAYRDVAWLGDCDQGCLALADLLGWKKELEDLVRREHANIDAQSGSQAPNPSTTISPGKSPPPAKEAARTKEKEEQQ"
+                }
+            ]
+        }
+    ]
+}

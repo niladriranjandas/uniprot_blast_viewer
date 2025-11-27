@@ -1,0 +1,2 @@
+[console_scripts]
+uniprot-blast-gui = uniprot_blast_viewer.view_blast_jason_web:main

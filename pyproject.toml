@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uniprot-blast-viewer"
+version = "0.1.0"
+description = "GUI + utilities to view BLAST (JSON) results and query UniProt/EBI APIs"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+license = { text = "MIT" }  # or what you prefer
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "requests",
+    "pandas",
+    "prettytable",
+    "PyQt5",      # or PyQt6 / PySide if you change it
+    "pyteomics",
+]
+
+[project.urls]
+Homepage = "https://github.com/niladriranjandas/uniprot_blast_viewer"
+
+[project.scripts]
+uniprot-blast-gui = "uniprot_blast_viewer.view_blast_jason_web:main"
+# optional second CLI:
+# uniprot-blast-cli = "uniprot_blast_viewer.uniprot_querry:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+uniprot_blast_viewer = ["data/*.json"]
+
