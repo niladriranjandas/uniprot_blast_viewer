@@ -8,7 +8,7 @@ Features:
  - Left: hits summary table
  - Right: HSP viewer with per-residue color highlighting (match=green, mismatch=red)
  - Slider to view windows of length 40 (adjustable)
- - Buttons: Isoform search, PTM search, Binding Info, General Info, Entire UniProt Page
+ - Buttons: Isoform search, PTM search, Binding Info, General PTMs, Entire UniProt Page
    Each button opens a dynamic table window with results returned from test stub functions
  - All code heavily commented for clarity
 """
@@ -33,8 +33,8 @@ from PyQt5.QtCore import Qt, QTimer
 from pyteomics import mass
 
 # -------------------------- Utils -----------------------------------
-from .uniprot_querry import get_isoforms_list, get_isoforms_list, get_PTMs_from_accession_list, import_BindingInfo_uniProt, do_seq_Blast_get_json
-
+from .uniprot_querry import getFasta_from_accession, get_isoforms_list, get_isoforms_list, get_PTMs_from_accession_list, import_BindingInfo_uniProt, do_seq_Blast_get_json
+from .general_utils import mw, enumerate_terminal_ptm_masses, fasta_to_sequence
 # ---------------------------
 # DEFAULT PATH (uploaded file)
 # ---------------------------
@@ -116,7 +116,7 @@ class BlastMainWindow(QWidget):
         self.txt_input.setPlaceholderText("Enter accession number or sequence here...")
 
         btn = QPushButton("Blast it wait a bit")
-        btn.setStyleSheet("backgrounwd:#444;color:white; font-weight:bold;")
+        btn.setStyleSheet("background:#444;color:white; font-weight:bold;")
         btn.clicked.connect(self._run_test_function)
 
         top_row.addWidget(lbl)
@@ -285,9 +285,12 @@ def user_query_info(qseq: str) -> str:
     """
     qseq_ = re.sub(r'[^A-Za-z]', '', qseq)
 
-    th_mass = mass.calculate_mass(qseq_)
-    return f"Mass={th_mass}"
+    #th_mass  = calculate_peptide_masses(qseq_)
 
+    th_mass_mono = mw(qseq_, monoisotopic=True)
+    th_mass_avg  = mw(qseq_, monoisotopic=False)
+    #return f"Avg Mass={th_mass.get('average_mass')}  Monoisotopic Mass={th_mass.get('monoisotopic_mass')}"
+    return f"Avg Mass={th_mass_avg}  Monoisotopic Mass={th_mass_mono}"
 
 def user_subject_info(hseq: str) -> str:
     """
@@ -295,8 +298,14 @@ def user_subject_info(hseq: str) -> str:
     and returns a useful string to display beside the 'Subject:' label.
     Replace this with your real function.
     """
-    th_mass = mass.calculate_mass(hseq)
-    return f"Mass={th_mass}"
+    hseq_ = re.sub(r'[^A-Za-z]', '', hseq)    
+
+    #th_mass  = calculate_peptide_masses(hseq_)
+    #return f"Avg Mass={th_mass.get('average_mass')}  Monoisotopic Mass={th_mass.get('monoisotopic_mass')}"
+
+    th_mass_mono = mw(hseq_, monoisotopic=True)
+    th_mass_avg  = mw(hseq_, monoisotopic=False)
+    return f"Avg Mass={th_mass_avg}  Monoisotopic Mass={th_mass_mono}"
 
 
 # -----------------------------------------------------------------------------
@@ -469,11 +478,14 @@ def test_binding_info(hit_accession: str) -> List[Dict[str, Any]]:
 
 def test_general_info(hit_accession: str) -> List[Dict[str, Any]]:
     """Return demo general info rows."""
-    return [
-        {"Field": "Protein Name", "Value": "Example Kinase"},
-        {"Field": "Organism", "Value": "Homo sapiens"},
-        {"Field": "Mass (Da)", "Value": "53,450"},
-    ]
+    fasta_seq = getFasta_from_accession(hit_accession)
+    seq       = fasta_to_sequence(fasta_seq)
+    return(enumerate_terminal_ptm_masses(seq))
+#    return [
+#        {"Field": "Protein Name", "Value": "Example Kinase"},
+#        {"Field": "Organism", "Value": "Homo sapiens"},
+#        {"Field": "Mass (Da)", "Value": "53,450"},
+#    ]
 
 def test_entire_uniprot_page(hit_accession: str) -> List[Dict[str, Any]]:
     """Return demo extracted UniProt page sections."""
@@ -920,7 +932,7 @@ class BlastJsonHspViewer(QWidget):
         self.btn_isoform = QPushButton("Isoform search")
         self.btn_ptm = QPushButton("PTM search")
         self.btn_bind = QPushButton("Binding Info")
-        self.btn_general = QPushButton("General Info")
+        self.btn_general = QPushButton("General PTMs")
         self.btn_uniprot = QPushButton("Entire uniprot page")
         for b in (self.btn_isoform, self.btn_ptm, self.btn_bind, self.btn_general, self.btn_uniprot):
             b.setStyleSheet("background:#333;color:white;font-weight:bold;")
@@ -1068,8 +1080,8 @@ class BlastJsonHspViewer(QWidget):
         if not acc:
             return
         rows = test_general_info(acc)
-        #self._open_table_window("General Info", rows)
-        self._safe_call("General Info", test_general_info, acc)
+        #self._open_table_window("General PTMs", rows)
+        self._safe_call("General PTMs", test_general_info, acc)
 
     #def _do_uniprot(self):
     #    acc = self._get_selected_hit_accession()
